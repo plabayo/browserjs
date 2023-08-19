@@ -1,0 +1,5 @@
+[workspace]
+members = [
+  "browserjs",
+]
+resolver = "2"
