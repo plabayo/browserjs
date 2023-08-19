@@ -2,7 +2,7 @@
 categories = ["javascript", "js", "browser", "v8", "ffi"]
 edition = "2021"
 name = "browserjs"
-version = "0.2.0"
+version = "0.0.0"
 description = "library to evaluate javascript (v8) within the context of a non-emulated self-driven context acting like a browser"
 homepage = "https://github.com/plabayo/browserjs"
 readme = "README.md"
