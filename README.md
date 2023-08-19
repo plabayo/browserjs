@@ -21,6 +21,55 @@
 
 This is an experimental project and no [minimal Rust version (MSRV)](https://rust-lang.github.io/rfcs/2495-min-rust-version.html) is defined or promised for the time being. Once this project is usuable (at your own risk) in production we will define one.
 
+## Wishlist
+
+Dream API:
+
+```python
+from browserjs import Browser
+
+browser = Browser(('chrome', '115'))
+
+browser.set_dom("""<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World! Site Title</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+  </body>
+</html>""")
+
+page_title = browser.eval_js("""document.title""")
+assert(page_title == "Hello World! Site Title")
+
+page_title = browser.eval_js("""document.write("foo"), document.title""")
+assert(page_title == "")
+
+ua = browser.eval_js("""navigator.userAgent""")
+assert(ua == 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36')
+```
+
+It is not a goal to make an actual "fake" browser.
+As such if you have a DOM containing javascript,
+it will never be loaded automatically, unless you
+make it evaluate the embedded js.
+
+Some features are also enabled only when
+you configure it with your own logic. E.g. making
+XHR requests is supported only if you specify the logic for
+it, these will be blocked by default.
+
+TODOS:
+
+* integrate V8 Engine
+* make small Rust Hello Eval lib with it,
+  that already uses Rust functionality
+* make a python wrapper
+  * not sure PyO3 will work here nicely given the native bindings to the v8 engine... We'll see
+
 ## Contributing
 
 :balloon: Thanks for your help improving the project! We are so happy to have
